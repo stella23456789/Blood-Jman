@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A2 Drift QUANTUM COSMETIC GEN V3</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 3rem 1rem;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    canvas#matrix, canvas#network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    canvas#matrix {
+      z-index: 0;
+      filter: blur(1px) brightness(1.4);
+    }
+
+    canvas#network {
+      z-index: 1;
+      filter: blur(2px);
+    }
+
+    .glass-card {
+      backdrop-filter: blur(25px) saturate(180%);
+      background: rgba(0, 25, 50, 0.35);
+      border: 1px solid rgba(0, 170, 255, 0.2);
+      border-radius: 2rem;
+      padding: 3rem;
+      max-width: 850px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(0, 150, 255, 0.25),
+                  inset 0 0 40px rgba(0, 255, 255, 0.05);
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #00f6ff, #00ffee, #0099ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 25px rgba(0,255,255,0.4);
+    }
+
+    input {
+      background: rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba(0,255,255,0.25) !important;
+      color: #00ffee !important;
+      border-radius: 50px !important;
+      text-align: center;
+    }
+
+    .btn-glass {
+      background: rgba(0,255,255,0.12);
+      border: 1px solid rgba(0,255,255,0.3);
+      color: #00ffee;
+      border-radius: 50px;
+      padding: 0.8rem 2.2rem;
+      margin: 0.4rem;
+      transition: all 0.3s ease-in-out;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .btn-glass:hover {
+      background: rgba(0,255,255,0.3);
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(0,255,255,0.6);
+    }
+
+    .terminal {
+      text-align: left;
+      font-family: monospace;
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      height: 150px;
+      overflow-y: auto;
+      font-size: 0.8rem;
+      color: #00ffee;
+      border: 1px solid rgba(0,255,255,0.2);
+      box-shadow: inset 0 0 15px rgba(0,255,255,0.25);
+    }
+
+    .progress {
+      height: 20px;
+      border-radius: 15px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(0,255,255,0.2);
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #00ffee, #0077ff, #00ffee);
+      animation: progressFlow 1.2s linear infinite;
+      background-size: 200% auto;
+    }
+
+    @keyframes progressFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    a.video-link {
+      color: #ffcc00;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a.video-link:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <canvas id="network"></canvas>
+
+  <div class="glass-card">
+    <h1>A2 Drift QUANTUM COSMETIC GEN V3</h1>
+    <p><strong>Quantum Cosmetic Protocol</strong> — grants verified cosmetics via A2 Drift Core API.</p>
+
+    <div id="terminal" class="terminal visually-hidden"></div>
+
+    <div class="progress visually-hidden" id="progressContainer">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%" id="progressBar"></div>
+    </div>
+
+    <form class="my-4">
+      <div class="mb-3">
+        <input type="text" id="username" class="form-control" placeholder="Enter A2 Username" required />
+      </div>
+
+      <button type="button" class="btn-glass" data-action="grantAll">GRANT ALL COSMETICS</button>
+      <button type="button" class="btn-glass" data-action="grantPaddle">GRANT PADDLE</button>
+      <button type="button" class="btn-glass" data-action="grantBadge">GRANT SHOOTING STAR BADGE</button>
+      <button type="button" class="btn-glass" data-action="grantCreator">GRANT AA CREATOR</button>
+      <button type="button" class="btn-glass" data-action="grantVoice">GRANT GOD VOICE</button>
+      <button type="button" class="btn-glass" data-action="grantMic">GRANT GOLDEN MIC</button>
+
+      <div class="mt-3">
+        <input type="text" id="cosmeticId" class="form-control" placeholder="Enter Cosmetic ID" />
+        <button type="button" class="btn-glass mt-2" data-action="grantById">GRANT COSMETIC BY ID</button>
+      </div>
+    </form>
+
+    <div id="result"></div>
+
+    <footer>© 2025 A2 Systems — Quantum Drift Core</footer>
+  </div>
+
+  <script>
+    // === BACKGROUND EFFECTS ===
+    const canvas=document.getElementById("matrix"),ctx=canvas.getContext("2d");
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const letters="01ABCDEF",fontSize=16,drops=Array(Math.floor(canvas.width/fontSize)).fill(1);
+    setInterval(()=>{ctx.fillStyle="rgba(0,0,0,0.1)";ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="rgba(0,180,255,0.9)";ctx.font=fontSize+"px monospace";
+      drops.forEach((y,i)=>{const text=letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,y*fontSize);if(y*fontSize>canvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++;});},50);
+
+    const net=document.getElementById("network"),nctx=net.getContext("2d");
+    net.width=window.innerWidth;net.height=window.innerHeight;
+    const nodes=Array.from({length:50},()=>({x:Math.random()*net.width,y:Math.random()*net.height,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4}));
+    function drawNetwork(){nctx.clearRect(0,0,net.width,net.height);
+      for(let i=0;i<nodes.length;i++){const a=nodes[i];a.x+=a.vx;a.y+=a.vy;
+        if(a.x<0||a.x>net.width)a.vx*=-1;if(a.y<0||a.y>net.height)a.vy*=-1;
+        nctx.beginPath();nctx.arc(a.x,a.y,2.5,0,Math.PI*2);nctx.fillStyle="rgba(0,200,255,0.6)";nctx.fill();
+        for(let j=i+1;j<nodes.length;j++){const b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<150){nctx.beginPath();nctx.moveTo(a.x,a.y);nctx.lineTo(b.x,b.y);
+            nctx.strokeStyle=`rgba(0,180,255,${0.15*(1-dist/150)})`;nctx.lineWidth=1.2;nctx.stroke();}}}
+      requestAnimationFrame(drawNetwork);}drawNetwork();
+
+    // === COSMETIC GENERATOR ===
+    const terminal=document.getElementById("terminal");
+    const result=document.getElementById("result");
+    const progressBar=document.getElementById("progressBar");
+    const progressContainer=document.getElementById("progressContainer");
+
+    const actions={
+      grantAll:"Granting all cosmetics via Quantum Sync...",
+      grantPaddle:"Allocating Paddle Cosmetic...",
+      grantBadge:"Minting Shooting Star Badge...",
+      grantCreator:"Assigning AA Creator Role...",
+      grantVoice:"Activating God Voice Module...",
+      grantMic:"Deploying Golden Mic Authority...",
+      grantById:"Fetching Cosmetic by ID..."
+    };
+
+    document.querySelectorAll("[data-action]").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const username=document.getElementById("username").value.trim();
+        if(!username){result.textContent="⚠ Please enter a username.";return;}
+        terminal.classList.remove("visually-hidden");
+        progressContainer.classList.remove("visually-hidden");
+        terminal.innerHTML="";result.innerHTML="";progressBar.style.width="0%";
+
+        const action=btn.getAttribute("data-action");
+        const id=document.getElementById("cosmeticId").value.trim();
+
+        const logs=[
+          "[INFO] Connecting to Drift Quantum Core...",
+          "[AUTH] Validating user credentials...",
+          `[USER] Target: ${username}`,
+          "[SYNC] Establishing grant channel...",
+          `[PROC] ${actions[action]||'Executing operation...'}`,
+          "[PROC] Processing subatomic keys...",
+          "[CORE] Sequence stable ✅",
+          "[SYSTEM] Writing cosmetic data...",
+          "[RESULT] Operation successful 🎉"
+        ];
+        if(action==="grantById"){if(!id){result.textContent="⚠ Please enter a Cosmetic ID.";return;}
+          logs.splice(4,0,`[QUERY] Cosmetic ID: ${id}`);}
+
+        let progress=0,logIndex=0;
+        const logStep=100/logs.length;
+
+        // slower overall speed (same as original)
+        const interval=setInterval(()=>{
+          progress+=Math.random()*1;
+          if(progress>=100)progress=100;
+          progressBar.style.width=progress+"%";
+
+          if(progress>=logIndex*logStep && logIndex<logs.length){
+            terminal.innerHTML+=logs[logIndex]+"<br/>";
+            terminal.scrollTop=terminal.scrollHeight;
+            logIndex++;
+          }
+
+          if(progress>=100){
+            clearInterval(interval);
+            setTimeout(()=>{
+              progressContainer.classList.add("visually-hidden");
+              terminal.innerHTML+=`[COMPLETE] Grant operation finished for "${username}".<br/>`;
+              result.innerHTML=`
+                ✅ Cosmetic operation complete for <strong>${username}</strong>.<br/>
+                ⚠ You must complete <a href="https://www.youtube.com/watch?v=BX5XSeCKz6k" target="_blank" class="video-link">THIS video</a> to finalize cosmetic synchronization.
+              `;
+            },1200);
+          }
+        },600*3);
+      });
+    });
+
+    window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;net.width=window.innerWidth;net.height=window.innerHeight;});
+  </script>
+</body>
+</html>
